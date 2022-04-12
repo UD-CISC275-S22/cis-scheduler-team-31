@@ -1,21 +1,29 @@
 import React from "react";
-import { Button, Row, Col, Container } from "react-bootstrap";
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import { Course } from "./interfaces/course";
 
-interface ScheduleProps {
-    setSchedule: (newSchedule: ) => void;
-    colorIndex: number;
+interface semesterProps {
+    setSemester: (newSemester: Course[]) => void;
+    semester: Course[];
 }
 
-export function ScheduleBuilder(): JSX.Element {
-    return <div></div>;
+export function semesterBuilder(): JSX.Element {
+    const [tempCourseName, setTempCourseName] = useState<string>("");
+    return (
+        <div>
+            <Form.Group controlId="name-box">
+                <Form.Label>Joe Shmoe</Form.Label>
+                <Form.Control value={userName} onChange={editName} />
+                <span></span>
+            </Form.Group>
+        </div>
+    );
 }
 
-function generateSchedule(): {
+function generateSemester(): Course[] {
+    return [];
+}
 
-};
-
-
-function addClass(): void {
+function addCourse(): void {
     return;
 }
-
