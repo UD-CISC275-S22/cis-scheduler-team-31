@@ -3,7 +3,7 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
-import { getFlag } from "./semesterBuilder";
+import { getFlag, getNum } from "./semesterBuilder";
 
 describe("Testing the semesterBuilder functions", () => {
     test("Testing getFlag funciton", () => {
@@ -13,8 +13,8 @@ describe("Testing the semesterBuilder functions", () => {
     });
 
     test("Testing getNum funciton", () => {
-        expect(getFlag("CISC275")).toBe("275");
-        expect(getFlag("123 CISC275")).toBe("123275");
-        expect(getFlag("7C5")).toBe("75");
+        expect(getNum("CISC275")).toBe("275");
+        expect(getNum("123 CISC275")).toBe("123275");
+        expect(getNum("7C5")).toBe("75");
     });
 });

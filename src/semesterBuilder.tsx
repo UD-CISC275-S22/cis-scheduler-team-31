@@ -29,12 +29,12 @@ export function getFlag(str: string): string {
         }
     }
     return flag; */
-    const flag = str.replace(/\D/g, "");
+    const flag = str.replace(/[^A-Za-z]/g, "");
     return flag;
 }
 
 export function getNum(str: string): string {
-    const numstr = str.replace(/[^a-z]/gi, "");
+    const numstr = str.replace(/[^0-9]/g, "");
     return numstr;
 }
 
