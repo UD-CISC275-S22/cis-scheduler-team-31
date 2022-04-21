@@ -1,25 +1,41 @@
 import React, { useState } from "react";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { Course } from "./interfaces/course";
+import flatten from "flat";
 
-import allCourses from `../catalog.json`
+import allCourses from "../catalog.json";
 
-interface semesterProps {
+export interface semesterProps {
     setSemester: (newSemester: Course[]) => void;
     semester: Course[];
 }
 
-interface courseProps {
+export interface courseProps {
     setCourse: (newCourse: Course) => void;
     course: Course;
 }
 
-function getCourseByID(id: string): Course {
-    let flag: string = id.map(c => {
-        parseInt(c)
-    });
-    
-    
+export function getCourseByID(id: string): Course {
+    const flag = getFlag(id);
+    const coursenum = getNum(id);
+}
+
+export function getFlag(str: string): string {
+    /*
+    let flag = "";
+    for (let i = 0; i < str.length; i++) {
+        if (str[i].match(/[a-z]/i)) {
+            flag += str[i];
+        }
+    }
+    return flag; */
+    const flag = str.replace(/\D/g, "");
+    return flag;
+}
+
+export function getNum(str: string): string {
+    const numstr = str.replace(/[^a-z]/gi, "");
+    return numstr;
 }
 
 export function semesterBuilder(): JSX.Element {
@@ -35,10 +51,10 @@ export function semesterBuilder(): JSX.Element {
     );
 }
 
-function generateSemester(): Course[] {
+export function generateSemester(): Course[] {
     return [];
 }
 
-function addCourse(): void {
+export function addCourse(): void {
     return;
 }
