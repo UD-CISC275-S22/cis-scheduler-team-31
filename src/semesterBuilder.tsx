@@ -5,6 +5,9 @@ import flatten from "flat";
 
 import allCourses from "../catalog.json";
 
+console.log(allCourses["ACCT"]["ACCT 200"]);
+//const flatcourses: Course[] = flatten(allCourses);
+
 export interface semesterProps {
     setSemester: (newSemester: Course[]) => void;
     semester: Course[];
@@ -15,12 +18,7 @@ export interface courseProps {
     course: Course;
 }
 
-export function getCourseByID(id: string): Course {
-    const flag = getFlag(id);
-    const coursenum = getNum(id);
-}
-
-export function getFlag(str: string): string {
+export function getFlag(str: string): keyof typeof allCourses {
     /*
     let flag = "";
     for (let i = 0; i < str.length; i++) {
@@ -29,32 +27,46 @@ export function getFlag(str: string): string {
         }
     }
     return flag; */
-    const flag = str.replace(/[^A-Za-z]/g, "");
+    const flagstr: string = str.replace(/[^A-Za-z]/g, "").toUpperCase();
+    const flag: keyof typeof allCourses = flagstr as keyof typeof allCourses;
     return flag;
 }
 
-export function getNum(str: string): string {
+export function getCourseID(str: string): keyof typeof allCourses {
     const numstr = str.replace(/[^0-9]/g, "");
-    return numstr;
+    const courseIDstr = getFlag(str) + " " + numstr;
+    const courseID: keyof typeof allCourses =
+        courseIDstr as keyof typeof allCourses;
+    return courseID;
 }
+
+export function getCourseByID(id: string): Course {}
 
 export function semesterBuilder(): JSX.Element {
     const [tempCourseName, setTempCourseName] = useState<string>("");
+
+    function getUserInput(event: React.ChangeEvent<HTMLInputElement>) {
+        setTempCourseName(event.target.value);
+    }
+
     return (
         <div>
-            <Form.Group controlId="name-box" onClick="generate">
-                <Form.Label>Joe Shmoe</Form.Label>
-                <Form.Control value={userName} onChange={editName} />
+            <Form.Group controlId="name-box">
+                <Form.Label>Add Course</Form.Label>
+                <Form.Control value={tempCourseName} onChange={getUserInput} />
                 <span></span>
             </Form.Group>
         </div>
     );
 }
 
-export function generateSemester(): Course[] {
-    return [];
+export function generateEmptySemester(semProps: semesterProps): void {
+    semProps.setSemester([]);
 }
 
-export function addCourse(): void {
-    return;
+export function addCourse(
+    { course }: courseProps,
+    { setSemester, semester }: semesterProps
+): void {
+    setSemester([...semester, course]);
 }
