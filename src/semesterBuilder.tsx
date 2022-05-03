@@ -4,6 +4,7 @@ import { Course } from "./interfaces/course";
 import flatten from "flat";
 
 import allCourses from "../catalog.json";
+import { GeneratedIdentifierFlags } from "typescript";
 
 console.log(allCourses["ACCT"]["ACCT 200"]);
 //const flatcourses: Course[] = flatten(allCourses);
@@ -32,15 +33,41 @@ export function getFlag(str: string): keyof typeof allCourses {
     return flag;
 }
 
-export function getCourseID(str: string): keyof typeof allCourses {
+export function getNums(str: string): string {
     const numstr = str.replace(/[^0-9]/g, "");
-    const courseIDstr = getFlag(str) + " " + numstr;
-    const courseID: keyof typeof allCourses =
-        courseIDstr as keyof typeof allCourses;
-    return courseID;
+    return numstr;
 }
 
-export function getCourseByID(id: string): Course {}
+export function getCourseID(str: string): string {
+    const numstr = str.replace(/[^0-9]/g, "");
+    const courseIDstr = getFlag(str) + " " + numstr;
+    //const courseID: keyof typeof school =
+    //courseIDstr as keyof typeof school;
+    return courseIDstr;
+}
+
+export function JSONtoCourse(id: string): Course {
+    const school = allCourses[getFlag(id)];
+    const courseID: keyof typeof school = getCourseID(
+        id
+    ) as keyof typeof school;
+    const courseJSON = school[courseID];
+    const course: Course = {
+        code: courseJSON.code,
+        name: courseJSON.name,
+        descr: courseJSON.descr,
+        credits: courseJSON.credits,
+        preReq: courseJSON.preReq,
+        restrict: courseJSON.restrict,
+        breadth: courseJSON.breadth,
+        typ: courseJSON.typ
+    };
+    return course;
+}
+
+export function getCourseByID(id: string): Course {
+    return allCourses[getFlag(id)][getCourseID(id)];
+}
 
 export function semesterBuilder(): JSX.Element {
     const [tempCourseName, setTempCourseName] = useState<string>("");
