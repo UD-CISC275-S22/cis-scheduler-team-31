@@ -4,6 +4,7 @@
 export interface Course {
     /** The course code: for example cisc275. Will be converted to uppercase
      *  in the code so can be upper or lowercase. */
+    code: string;
     name: string;
     descr: string;
     credits: string;
