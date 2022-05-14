@@ -6,7 +6,7 @@ import flatten from "flat";
 import allCourses from "../catalog.json";
 import { GeneratedIdentifierFlags } from "typescript";
 
-console.log(allCourses["ACCT"]["ACCT 200"]);
+console.log(allCourses["CISC"]["CISC 275"]);
 //const flatcourses: Course[] = flatten(allCourses);
 
 export interface semesterProps {
@@ -19,15 +19,16 @@ export interface courseProps {
     course: Course;
 }
 
+/*
 export function getFlag(str: string): keyof typeof allCourses {
-    /*
+    // COMMENT DOWN
     let flag = "";
     for (let i = 0; i < str.length; i++) {
         if (str[i].match(/[a-z]/i)) {
             flag += str[i];
         }
     }
-    return flag; */
+    return flag; // COMMENT UP
     const flagstr: string = str.replace(/[^A-Za-z]/g, "").toUpperCase();
     const flag: keyof typeof allCourses = flagstr as keyof typeof allCourses;
     return flag;
@@ -47,22 +48,33 @@ export function getCourseID(str: string): string {
 }
 
 export function JSONtoCourse(id: string): Course {
+    const flag = getFlag(id);
+    const school = allCourses[flag];
+    const cid = getCourseID(id);
+    let course: Course = new Course();
+    for (const key in school) {
+        if (key === cid) {
+            course.code = school[key];
+        }
+    }
+
+    // COMMENT DOWN
     const school = allCourses[getFlag(id)];
-    const courseID: keyof typeof school = getCourseID(
+    const formattedID: keyof typeof school = getCourseID(
         id
     ) as keyof typeof school;
-    const courseJSON = school[courseID];
     const course: Course = {
-        code: courseJSON.code,
-        name: courseJSON.name,
-        descr: courseJSON.descr,
-        credits: courseJSON.credits,
-        preReq: courseJSON.preReq,
-        restrict: courseJSON.restrict,
-        breadth: courseJSON.breadth,
-        typ: courseJSON.typ
+        code: school.code,
+        name: school.name,
+        descr: school.descr,
+        credits: school.credits,
+        preReq: school.preReq,
+        restrict: school.restrict,
+        breadth: school.breadth,
+        typ: school.typ
     };
     return course;
+    // COMMENT UP
 }
 
 export function getCourseByID(id: string): Course {
@@ -97,3 +109,4 @@ export function addCourse(
 ): void {
     setSemester([...semester, course]);
 }
+*/
