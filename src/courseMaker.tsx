@@ -138,8 +138,14 @@ export function InputRestrict({
 
     return (
         <Form.Group controlId="restrictinputbox">
-            <Form.Label style={{ fontSize: 18 }}>Course Restrict:</Form.Label>
-            <Form.Control value={restrictProp} onChange={getInput} />
+            <Form.Label style={{ fontSize: 18 }}>
+                Course Restrictions:
+            </Form.Label>
+            <Form.Control
+                value={restrictProp}
+                onChange={getInput}
+                placeholder="Resctrictions"
+            />
         </Form.Group>
     );
 }
@@ -159,8 +165,14 @@ export function InputBreadth({
 
     return (
         <Form.Group controlId="breadthinputbox">
-            <Form.Label style={{ fontSize: 18 }}>Course Breadth:</Form.Label>
-            <Form.Control value={breadthProp} onChange={getInput} />
+            <Form.Label style={{ fontSize: 18 }}>
+                Course Breadth Fulfillments:
+            </Form.Label>
+            <Form.Control
+                value={breadthProp}
+                onChange={getInput}
+                placeholder="Breadth"
+            />
         </Form.Group>
     );
 }
@@ -177,13 +189,31 @@ export function InputTyp({ typProp, setTyp }: typProps): JSX.Element {
 
     return (
         <Form.Group controlId="typinputbox">
-            <Form.Label style={{ fontSize: 18 }}>Course Typ:</Form.Label>
-            <Form.Control value={typProp} onChange={getInput} />
+            <Form.Label style={{ fontSize: 18 }}>Course Type:</Form.Label>
+            <Form.Control
+                value={typProp}
+                onChange={getInput}
+                placeholder="Type"
+            />
         </Form.Group>
     );
 }
 
-export function InputCrseInfo(): JSX.Element {
+export function makeEmptyCourse(): Course {
+    const newCourse: Course = {
+        code: "",
+        name: "",
+        descr: "",
+        credits: "",
+        prereq: "",
+        restrict: "",
+        breadth: "",
+        typ: ""
+    };
+    return newCourse;
+}
+
+export function InputCrseInfo({ course, setCourse }: courseProps): JSX.Element {
     const [codeProp, setCode] = useState<string>("");
     const [nameProp, setName] = useState<string>("");
     const [descrProp, setDescr] = useState<string>("");
@@ -192,51 +222,81 @@ export function InputCrseInfo(): JSX.Element {
     const [restrictProp, setRestrict] = useState<string>("");
     const [breadthProp, setBreadth] = useState<string>("");
     const [typProp, setTyp] = useState<string>("");
+
+    function clear(): void {
+        setCode("");
+        setName("");
+        setDescr("");
+        setCredits("");
+        setPrereq("");
+        setRestrict("");
+        setBreadth("");
+        setTyp("");
+    }
+
+    function makeManualCourse(): void {
+        const newCourse: Course = {
+            code: codeProp,
+            name: nameProp,
+            descr: descrProp,
+            credits: creditsProp,
+            prereq: prereqProp,
+            restrict: restrictProp,
+            breadth: breadthProp,
+            typ: typProp
+        };
+        setCourse(newCourse);
+    }
+
     return (
         <div>
-            <Container>
-                <Row className="mb-3">
-                    <Col>
-                        <InputCode
-                            codeProp={codeProp}
-                            setCode={setCode}
-                        ></InputCode>
-                    </Col>
-                    <Col>
-                        <InputCredits
-                            creditsProp={creditsProp}
-                            setCredits={setCredits}
-                        ></InputCredits>
-                    </Col>
-                </Row>
-                <InputName nameProp={nameProp} setName={setName}></InputName>
-                <InputDescr
-                    descrProp={descrProp}
-                    setDescr={setDescr}
-                ></InputDescr>
+            <br />
+            <h5>Enter your course information below</h5>
+            <br />
+            <Row className="mb-3">
+                <Col>
+                    <InputCode
+                        codeProp={codeProp}
+                        setCode={setCode}
+                    ></InputCode>
+                </Col>
+                <Col>
+                    <InputCredits
+                        creditsProp={creditsProp}
+                        setCredits={setCredits}
+                    ></InputCredits>
+                </Col>
+            </Row>
+            <InputName nameProp={nameProp} setName={setName}></InputName>
+            <InputDescr descrProp={descrProp} setDescr={setDescr}></InputDescr>
 
-                <InputPrereq
-                    prereqProp={prereqProp}
-                    setPrereq={setPrereq}
-                ></InputPrereq>
+            <InputPrereq
+                prereqProp={prereqProp}
+                setPrereq={setPrereq}
+            ></InputPrereq>
 
-                <InputRestrict
-                    restrictProp={restrictProp}
-                    setRestrict={setRestrict}
-                ></InputRestrict>
+            <InputRestrict
+                restrictProp={restrictProp}
+                setRestrict={setRestrict}
+            ></InputRestrict>
 
-                <InputBreadth
-                    breadthProp={breadthProp}
-                    setBreadth={setBreadth}
-                ></InputBreadth>
+            <InputBreadth
+                breadthProp={breadthProp}
+                setBreadth={setBreadth}
+            ></InputBreadth>
 
-                <InputTyp typProp={typProp} setTyp={setTyp}></InputTyp>
-
-                <Row>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            </Container>
+            <InputTyp typProp={typProp} setTyp={setTyp}></InputTyp>
+            <br />
+            <Row>
+                <Col>
+                    <Button onClick={makeManualCourse}>Add Course</Button>
+                </Col>
+                <Col>
+                    <Button className="btn btn-secondary" onClick={clear}>
+                        Clear Course
+                    </Button>
+                </Col>
+            </Row>
         </div>
     );
 }

@@ -19,16 +19,7 @@ export interface courseProps {
     course: Course;
 }
 
-/*
 export function getFlag(str: string): keyof typeof allCourses {
-    // COMMENT DOWN
-    let flag = "";
-    for (let i = 0; i < str.length; i++) {
-        if (str[i].match(/[a-z]/i)) {
-            flag += str[i];
-        }
-    }
-    return flag; // COMMENT UP
     const flagstr: string = str.replace(/[^A-Za-z]/g, "").toUpperCase();
     const flag: keyof typeof allCourses = flagstr as keyof typeof allCourses;
     return flag;
@@ -42,11 +33,21 @@ export function getNums(str: string): string {
 export function getCourseID(str: string): string {
     const numstr = str.replace(/[^0-9]/g, "");
     const courseIDstr = getFlag(str) + " " + numstr;
-    //const courseID: keyof typeof school =
-    //courseIDstr as keyof typeof school;
     return courseIDstr;
 }
 
+export function generateEmptySemester(semProps: semesterProps): void {
+    semProps.setSemester([]);
+}
+
+export function addCourse(
+    { course }: courseProps,
+    { setSemester, semester }: semesterProps
+): void {
+    setSemester([...semester, course]);
+}
+
+/*
 export function JSONtoCourse(id: string): Course {
     const flag = getFlag(id);
     const school = allCourses[flag];
@@ -74,39 +75,4 @@ export function JSONtoCourse(id: string): Course {
         typ: school.typ
     };
     return course;
-    // COMMENT UP
-}
-
-export function getCourseByID(id: string): Course {
-    return allCourses[getFlag(id)][getCourseID(id)];
-}
-
-export function semesterBuilder(): JSX.Element {
-    const [tempCourseName, setTempCourseName] = useState<string>("");
-
-    function getUserInput(event: React.ChangeEvent<HTMLInputElement>) {
-        setTempCourseName(event.target.value);
-    }
-
-    return (
-        <div>
-            <Form.Group controlId="name-box">
-                <Form.Label>Add Course</Form.Label>
-                <Form.Control value={tempCourseName} onChange={getUserInput} />
-                <span></span>
-            </Form.Group>
-        </div>
-    );
-}
-
-export function generateEmptySemester(semProps: semesterProps): void {
-    semProps.setSemester([]);
-}
-
-export function addCourse(
-    { course }: courseProps,
-    { setSemester, semester }: semesterProps
-): void {
-    setSemester([...semester, course]);
-}
-*/
+} */
