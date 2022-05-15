@@ -104,16 +104,9 @@ export function Render(): JSX.Element {
                     <Col xs={7}>
                         <Container>
                             <InputCrseInfo
-                                course={course}
-                                setCourse={setCourse}
+                                semester={semester}
+                                setSemester={setSemester}
                             ></InputCrseInfo>
-                            <Button
-                                onClick={() =>
-                                    setSemester([...semester, course])
-                                }
-                            >
-                                Add to semester
-                            </Button>
                         </Container>
                     </Col>
                     <Col>

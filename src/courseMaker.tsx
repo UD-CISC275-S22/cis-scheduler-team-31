@@ -213,7 +213,10 @@ export function makeEmptyCourse(): Course {
     return newCourse;
 }
 
-export function InputCrseInfo({ course, setCourse }: courseProps): JSX.Element {
+export function InputCrseInfo({
+    semester,
+    setSemester
+}: semesterProps): JSX.Element {
     const [codeProp, setCode] = useState<string>("");
     const [nameProp, setName] = useState<string>("");
     const [descrProp, setDescr] = useState<string>("");
@@ -245,7 +248,7 @@ export function InputCrseInfo({ course, setCourse }: courseProps): JSX.Element {
             breadth: breadthProp,
             typ: typProp
         };
-        setCourse(newCourse);
+        setSemester([...semester, newCourse]);
     }
 
     return (
