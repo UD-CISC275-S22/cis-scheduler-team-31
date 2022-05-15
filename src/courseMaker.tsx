@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { Course } from "./interfaces/course";
-import { courseProps } from "./semesterBuilder";
+import { courseProps, semesterProps } from "./semesterBuilder";
 
 export interface codeProps {
     setCode: (newCode: string) => void;
@@ -289,7 +289,7 @@ export function InputCrseInfo({ course, setCourse }: courseProps): JSX.Element {
             <br />
             <Row>
                 <Col>
-                    <Button onClick={makeManualCourse}>Add Course</Button>
+                    <Button onClick={makeManualCourse}>Save Course</Button>
                 </Col>
                 <Col>
                     <Button className="btn btn-secondary" onClick={clear}>

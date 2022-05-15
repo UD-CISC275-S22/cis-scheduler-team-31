@@ -26,6 +26,7 @@ const crse2: Course = {
 };
 
 export function DisplayCourse(course: Course): JSX.Element {
+    // Currently Broken, Ignore
     function expand(): JSX.Element {
         return (
             <div>
@@ -106,6 +107,13 @@ export function Render(): JSX.Element {
                                 course={course}
                                 setCourse={setCourse}
                             ></InputCrseInfo>
+                            <Button
+                                onClick={() =>
+                                    setSemester([...semester, course])
+                                }
+                            >
+                                Add to semester
+                            </Button>
                         </Container>
                     </Col>
                     <Col>
