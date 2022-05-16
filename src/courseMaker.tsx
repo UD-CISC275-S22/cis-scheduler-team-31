@@ -201,6 +201,7 @@ export function InputTyp({ typProp, setTyp }: typProps): JSX.Element {
 
 export function makeEmptyCourse(): Course {
     const newCourse: Course = {
+        expanded: false,
         code: "",
         name: "",
         descr: "",
@@ -239,6 +240,7 @@ export function InputCrseInfo({
 
     function makeManualCourse(): void {
         const newCourse: Course = {
+            expanded: false,
             code: codeProp,
             name: nameProp,
             descr: descrProp,
@@ -248,7 +250,7 @@ export function InputCrseInfo({
             breadth: breadthProp,
             typ: typProp
         };
-        setSemester([...semester, newCourse]);
+        setSemester({ ...semester, [newCourse.code]: newCourse });
     }
 
     return (
@@ -292,7 +294,13 @@ export function InputCrseInfo({
             <br />
             <Row>
                 <Col>
-                    <Button onClick={makeManualCourse}>Save Course</Button>
+                    <Button
+                        onClick={() => {
+                            makeManualCourse();
+                        }}
+                    >
+                        Save Course
+                    </Button>
                 </Col>
                 <Col>
                     <Button className="btn btn-secondary" onClick={clear}>

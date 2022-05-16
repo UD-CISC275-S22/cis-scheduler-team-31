@@ -3,16 +3,32 @@ import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { Course } from "./interfaces/course";
 import flatten from "flat";
 
-import allCourses from "../catalog.json";
+import allCourses from "./catalog.json";
 import { GeneratedIdentifierFlags } from "typescript";
 
 console.log(allCourses["CISC"]["CISC 275"]);
 //const flatcourses: Course[] = flatten(allCourses);
 
 export interface semesterProps {
-    setSemester: (newSemester: Course[]) => void;
-    semester: Course[];
+    setSemester: (newSemester: Record<string, Course>) => void;
+    semester: Record<string, Course>;
 }
+
+// Function for searching course array as a record
+/*
+export function getCourse(
+    code: string,
+    { semester, setSemester }: semesterProps
+): Course {
+    const semesterRec: Record<string, Course> = Object.fromEntries(
+        semester.map((course: Course): [string, Course] => [
+            course.code,
+            course
+        ])
+    );
+    return semesterRec[code];
+}
+*/
 
 export interface courseProps {
     setCourse: (newCourse: Course) => void;
@@ -36,15 +52,15 @@ export function getCourseID(str: string): string {
     return courseIDstr;
 }
 
-export function generateEmptySemester(semProps: semesterProps): void {
-    semProps.setSemester([]);
+export function generateEmptySemester({ setSemester }: semesterProps): void {
+    setSemester({});
 }
 
 export function addCourse(
     { course }: courseProps,
     { setSemester, semester }: semesterProps
 ): void {
-    setSemester([...semester, course]);
+    setSemester({ ...semester, [course.code]: course });
 }
 
 /*
