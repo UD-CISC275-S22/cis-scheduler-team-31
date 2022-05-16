@@ -1,6 +1,6 @@
 {
-    "name": "react-typescript-starter",
-    "homepage": "homepage",
+    "name": "275-scheduler-trevor",
+    "homepage": "https://ud-cisc275-s22.github.io/cis-scheduler-team-31/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

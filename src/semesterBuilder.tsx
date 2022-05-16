@@ -1,10 +1,6 @@
-import React, { useState } from "react";
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { Course } from "./interfaces/course";
-import flatten from "flat";
 
 import allCourses from "./catalog.json";
-import { GeneratedIdentifierFlags } from "typescript";
 
 console.log(allCourses["CISC"]["CISC 275"]);
 //const flatcourses: Course[] = flatten(allCourses);
