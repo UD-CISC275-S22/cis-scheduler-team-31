@@ -201,6 +201,7 @@ export function InputTyp({ typProp, setTyp }: typProps): JSX.Element {
 
 export function makeEmptyCourse(): Course {
     const newCourse: Course = {
+        expanded: false,
         code: "",
         name: "",
         descr: "",
@@ -213,7 +214,10 @@ export function makeEmptyCourse(): Course {
     return newCourse;
 }
 
-export function InputCrseInfo({ course, setCourse }: courseProps): JSX.Element {
+export function InputCrseInfo({
+    semester,
+    setSemester
+}: semesterProps): JSX.Element {
     const [codeProp, setCode] = useState<string>("");
     const [nameProp, setName] = useState<string>("");
     const [descrProp, setDescr] = useState<string>("");
@@ -236,6 +240,7 @@ export function InputCrseInfo({ course, setCourse }: courseProps): JSX.Element {
 
     function makeManualCourse(): void {
         const newCourse: Course = {
+            expanded: false,
             code: codeProp,
             name: nameProp,
             descr: descrProp,
@@ -245,7 +250,7 @@ export function InputCrseInfo({ course, setCourse }: courseProps): JSX.Element {
             breadth: breadthProp,
             typ: typProp
         };
-        setCourse(newCourse);
+        setSemester({ ...semester, [newCourse.code]: newCourse });
     }
 
     return (
@@ -289,7 +294,13 @@ export function InputCrseInfo({ course, setCourse }: courseProps): JSX.Element {
             <br />
             <Row>
                 <Col>
-                    <Button onClick={makeManualCourse}>Save Course</Button>
+                    <Button
+                        onClick={() => {
+                            makeManualCourse();
+                        }}
+                    >
+                        Save Course
+                    </Button>
                 </Col>
                 <Col>
                     <Button className="btn btn-secondary" onClick={clear}>
