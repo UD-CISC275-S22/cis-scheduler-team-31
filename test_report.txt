@@ -1,0 +1,32 @@
+
+> 275-scheduler-trevor@0.1.0 test
+> react-scripts test "--coverage"
+
+FAIL src/semsterBuilder.test.ts
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+----------------------|---------|----------|---------|---------|-------------------
+File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------------------|---------|----------|---------|---------|-------------------
+All files             |       0 |        0 |       0 |       0 |                   
+ src                  |       0 |        0 |       0 |       0 |                   
+  App.tsx             |       0 |      100 |       0 |       0 | 7                 
+  courseMaker.tsx     |       0 |      100 |       0 |       0 | 13-299            
+  render.tsx          |       0 |        0 |       0 |       0 | 18-124            
+  semesterBuilder.tsx |       0 |      100 |       0 |       0 | 5-59              
+ src/interfaces       |       0 |        0 |       0 |       0 |                   
+  course.ts           |       0 |        0 |       0 |       0 |                   
+----------------------|---------|----------|---------|---------|-------------------
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        2.469 s
+Ran all test suites.
