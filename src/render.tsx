@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { InputCrseInfo, makeEmptyCourse } from "./courseMaker";
-import { courseProps, semesterProps } from "./semesterBuilder";
+import { InputCrseInfo } from "./courseMaker";
+import { semesterProps } from "./semesterBuilder";
 import {
     Form,
-    Button,
     Row,
     Col,
     Container,
